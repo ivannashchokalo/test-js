@@ -102,3 +102,109 @@
 // }
 
 // console.log(findWords(text));
+
+//==== 4
+
+// [
+//   { id: 1, title: "Phone", price: 1000 },
+//   { id: 2, title: "TV", price: 2000 },
+//   { id: 3, title: "Laptop", price: 3000 },
+// ]
+
+// const products = [
+//   { id: 1, title: "Phone" },
+//   { id: 2, title: "TV" },
+//   { id: 3, title: "Laptop" },
+// ];
+
+// const prices = [
+//   { productId: 1, price: 1000 },
+//   { productId: 2, price: 2000 },
+//   { productId: 3, price: 3000 },
+// ];
+
+// function concatArr(arr1, arr2) {
+
+//1
+//   const newArr = products.map((product) => {
+//     return prices.reduce((acc, { productId, ...price }) => {
+//       return { ...product, ...price };
+//     }, {});
+//   });
+
+//2
+//   products.map((product) => ({
+//     ...product,
+//     price: prices.find((p) => p.productId === product.id)?.price,
+//   }));
+
+//   console.log(newArr);
+// }
+
+// console.log(concatArr());
+
+//======== 5
+
+// [
+//   { id: 2, name: "TV" }
+// ]
+
+// const products = [
+//   { id: 1, name: "Phone" },
+//   { id: 2, name: "TV" },
+//   { id: 3, name: "Laptop" },
+// ];
+
+// const stock = [
+//   { productId: 1, quantity: 10 },
+//   { productId: 3, quantity: 5 },
+// ];
+
+// function findProducts(products, stock) {
+//   return products.filter((product) => {
+//     const res = !stock.some((item) => item.productId === product.id);
+//   });
+// }
+
+// console.log(findProducts(products, stock));
+
+//========== 6
+
+// const users = [
+//   { name: "Kate", age: 25 },
+//   { name: "Ann", age: 25 },
+//   { name: "John", age: 18 },
+// ];
+
+// function sort(users) {
+//   return users.toSorted((a, b) => {
+//     if (a.age == b.age) {
+//       return a.name.localeCompare(b.name);
+//     }
+//     return a.age - b.age;
+//   });
+// }
+
+// console.log(sort(users));
+
+//============ 7. доробити
+
+const emails = [
+  "a@gmail.com",
+  "b@gmail.com",
+  "a@gmail.com",
+  "c@gmail.com",
+  "b@gmail.com",
+];
+
+// ["a@gmail.com", "b@gmail.com"]
+
+function findDuplicates(emails) {
+  let dublicates = [];
+
+  const arr = [...new Set(emails)];
+
+  return arr;
+}
+
+console.log(findDuplicates(emails));
