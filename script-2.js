@@ -451,3 +451,337 @@
 
 // console.log(calculate(2, 3, add)); // 5
 // console.log(calculate(2, 3, multiply)); // 6
+
+//====== 19
+
+// function once(fn) {
+//   let count = 0;
+
+//   return function inner() {
+//     if (count === 1) return;
+//     fn();
+//     count += 1;
+//   };
+// }
+
+// function greet() {
+//   console.log("Hello");
+// }
+
+// const greetOnce = once(greet);
+
+// greetOnce(); // Hello
+// greetOnce(); // нічого
+// greetOnce(); // нічого
+
+//======= 20 універсальна
+
+// function once(fn) {
+//   let count = 0;
+
+//   return function inner(...values) {
+//     if (count === 1) return;
+//     fn(...values);
+//     count += 1;
+//   };
+// }
+
+// function greet(a, b, c) {
+//   console.log(`Hello, ${a + b + c}`);
+// }
+
+// const greetOnce = once(greet);
+
+// greetOnce(1, 2, 3); // Hello
+// greetOnce("Ivanka"); // нічого
+// greetOnce("Ivanka"); // нічого
+
+//========= 21
+
+// function sum(...numbers) {
+//   let sum = 0;
+//   numbers.forEach((number) => (sum += number));
+//   return sum;
+// }
+
+// console.log(sum(1, 2));
+// console.log(sum(1, 2, 3, 4));
+// console.log(sum());
+
+//=========== 22
+
+// function myMap(array, callback) {
+//   let newArr = [];
+//   for (let i = 0; i < array.length; i += 1) {
+//     const res = callback(array[i], i, array);
+//     newArr.push(res);
+//   }
+
+//   return newArr;
+// }
+
+// console.log(myMap([1, 2, 3], (x) => x * 2));
+
+//========== 23
+
+// function myFilter(array, callback) {
+//   let newArray = [];
+//   for (let i = 0; i < array.length; i += 1) {
+//     const res = callback(array[i], i, array);
+//     if (res) {
+//       newArray.push(array[i]);
+//     }
+//   }
+//   return newArray;
+// }
+
+// console.log(myFilter([1, 2, 3], (el) => el > 2));
+
+//============== 24
+
+// function myReduce(array, callback, initialAcc) {
+//   if (initialAcc) {
+//     let acc = initialAcc;
+
+//     for (let i = 0; i < array.length; i++) {
+//       const res = callback(acc, array[i], i, array);
+//       acc = res;
+//     }
+
+//     return acc;
+//   } else {
+//     let acc = array[0];
+
+//     for (let i = 1; i < array.length; i++) {
+//       const res = callback(acc, array[i], i, array);
+//       acc = res;
+//     }
+
+//     return acc;
+//   }
+// }
+
+// console.log(myReduce([1, 2, 3], (acc, el, i) => acc + el, 0));
+
+//======
+
+// function myReduce(array, callback, initialAcc) {
+//   if (arguments.length >= 3) {
+//     let acc = initialAcc;
+
+//     for (let i = 0; i < array.length; i++) {
+//       const res = callback(acc, array[i], i, array);
+//       acc = res;
+//     }
+
+//     return acc;
+//   } else {
+//     let acc = array[0];
+
+//     for (let i = 1; i < array.length; i++) {
+//       const res = callback(acc, array[i], i, array);
+//       acc = res;
+//     }
+
+//     return acc;
+//   }
+// }
+
+// console.log(myReduce([1, 2, 3], (acc, el, i) => acc + el, 0));
+
+//===============================================================
+//============== promise
+
+//============== 1
+
+// function waitOneSecond() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("Done");
+//     }, 1000);
+//   });
+// }
+
+// waitOneSecond().then((value) => console.log(value));
+
+//============= 2
+
+// function delay(ms) {
+//   return new Promise((resolve, reject) => {
+//     if (ms < 0) return reject("Time must be positive");
+//     setTimeout(() => {
+//       resolve("Done");
+//     }, ms);
+//   });
+// }
+
+// delay(2000)
+//   .then((value) => console.log(value))
+//   .catch((err) => console.log(err));
+// delay(-5000)
+//   .then((value) => console.log(value))
+//   .catch((err) => console.log(err));
+
+//=============== 3
+// function getUser() {
+//   return Promise.resolve({
+//     id: 1,
+//     name: "Ivanna",
+//   });
+// }
+
+// getUser()
+//   .then((value) => console.log(value.name))
+//   .catch((err) => console.log(err));
+
+//=============== 4
+
+// function login() {
+//   return Promise.resolve({ id: 1, token: "abc123" });
+// }
+
+// function getProfile(token) {
+//   return Promise.resolve({
+//     name: "Ivanna",
+//     age: 29,
+//   });
+// }
+
+// login()
+//   .then((obj) => obj.token)
+//   .then((token) => getProfile(token))
+//   .then((prof) => prof.name)
+//   .catch((err) => err);
+
+//=============== 5
+
+// function getUserName() {
+//   return Promise.resolve("Ivanka");
+// }
+
+// getUserName().then((name) => console.log(name));
+
+//============= 6
+
+// function fetchUser() {
+//   return Promise.resolve({
+//     id: 1,
+//     name: "Ivanna",
+//   });
+// }
+
+// function getUppercaseUserName() {
+//   return fetchUser().then((obj) => obj.name.toUpperCase());
+// }
+
+// getUppercaseUserName()
+//   .then((val) => console.log(val))
+//   .catch((err) => console.log(err));
+
+//============= 7
+
+// function fetchProducts() {
+//   return Promise.resolve([
+//     { id: 1, name: "Phone", price: 500 },
+//     { id: 2, name: "Laptop", price: 1200 },
+//     { id: 3, name: "Mouse", price: 30 },
+//   ]);
+// }
+
+// function getExpensiveProducts() {
+//   return fetchProducts().then((products) =>
+//     products.filter((product) => product.price >= 100),
+//   );
+// }
+
+// getExpensiveProducts()
+//   .then((pr) => console.log(pr))
+//   .catch((err) => console.log(err));
+
+//================ 8
+
+// function fetchUsers() {
+//   return Promise.resolve(["Ivanna", "John"]);
+// }
+
+// function fetchProducts() {
+//   return Promise.resolve(["Phone", "Laptop"]);
+// }
+
+// function fetchOrders() {
+//   return Promise.resolve([100, 200]);
+// }
+
+// function loadData() {
+//   return Promise.all([fetchUsers(), fetchProducts(), fetchOrders()]);
+// }
+
+// loadData().then((data) => console.log(data));
+
+//=============== 9
+
+// function fetchUsers() {
+//   return Promise.resolve(["Ivanna", "John"]);
+// }
+
+// function fetchProducts() {
+//   return Promise.reject("Server error");
+// }
+
+// function fetchOrders() {
+//   return Promise.resolve([101, 102]);
+// }
+
+// function loadData() {
+//   return Promise.allSettled([fetchUsers(), fetchProducts(), fetchOrders()]);
+// }
+
+// loadData()
+//   .then((data) => {
+//     return data.reduce(
+//       (acc, el) => {
+//         if (el.status === "fulfilled") {
+//           acc.success.push(el.value);
+//         } else if (el.status === "rejected") {
+//           acc.reason.push(el.reason);
+//         }
+//         return acc;
+//       },
+//       { success: [], reason: [] },
+//     );
+//   })
+//   .then((obj) => console.log(obj));
+
+//================ 10
+
+// function timeot(ms) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => reject("Request timeout"), ms);
+//   });
+// }
+
+// timeot(1000)
+//   .then((a) => console.log(a))
+//   .catch((er) => console.log(er));
+
+//================ 11
+
+// function fetchUsers() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve(["Ivanna", "John"]), 3000);
+//   });
+// }
+
+// function fetchWithTimeot() {
+//   function timeot() {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => reject("Request timeout"), 2000);
+//     });
+//   }
+
+//   return Promise.race([fetchUsers(), timeot()]);
+// }
+
+// fetchWithTimeot()
+//   .then((data) => console.log(data))
+//   .catch((er) => console.log(er));
