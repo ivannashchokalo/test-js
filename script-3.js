@@ -76,21 +76,78 @@
 
 //============ 4
 
-async function fetchPosts() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  if (!res.ok) {
-    throw new Error("error");
-  }
-  return res.json();
-}
+// async function fetchPosts() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//   if (!res.ok) {
+//     throw new Error("error");
+//   }
+//   return res.json();
+// }
 
-async function getPostTitles() {
-  try {
-    const data = await fetchPosts();
-    return data.map((obj) => obj.title);
-  } catch (error) {
-    console.log(error);
-  }
-}
+// async function getPostTitles() {
+//   try {
+//     const data = await fetchPosts();
+//     return data.map((obj) => obj.title);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
-console.log(await getPostTitles());
+// console.log(await getPostTitles());
+
+//============= 5
+
+// async function getUsersByCity(city) {
+//   try {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/users");
+//     if (!res.ok) {
+//       throw new Error("Error");
+//     }
+
+//     const users = await res.json();
+
+//     return users.filter((user) => user.address.city === city);
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+// const usersByCity = await getUsersByCity("South Christy");
+
+// console.log(usersByCity);
+
+//============= 6
+
+// async function getUsersWithPosts() {
+//   try {
+//     const userRes = await fetch("https://jsonplaceholder.typicode.com/users");
+
+//     if (!userRes.ok) {
+//       throw new Error("Users error");
+//     }
+
+//     const postsRes = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+//     if (!postsRes.ok) {
+//       throw new Error("Posts error");
+//     }
+
+//     const users = await userRes.json();
+//     const posts = await postsRes.json();
+
+//     return users.reduce((acc, user) => {
+//       const userPosts = posts.filter((post) => post.userId === user.id);
+//       acc.push({
+//         name: user.name,
+//         postCount: userPosts.length,
+//       });
+
+//       return acc;
+//     }, []);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// const result = await getUsersWithPosts();
+// console.log(result);
